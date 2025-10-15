@@ -68,30 +68,42 @@
 
   <script src="https://payment.tmtprotects.com/tmt-payment-modal.3.6.1.js"></script>
   <script>
+  document.addEventListener('DOMContentLoaded', function() {
     const params = new URLSearchParams(window.location.search);
     const auth = params.get('auth');
     const channels = params.get('channels');
     const currencies = params.get('currencies');
     const total = params.get('total');
 
-    document.getElementById('tmt_booking_auth').value = auth || '';
-    document.getElementById('tmt_channels').value = channels || '';
-    document.getElementById('tmt_currencies').value = currencies || '';
-    document.getElementById('tmt_total').value = total || '';
+  document.getElementById('tmt_booking_auth').value = auth || '';
+  document.getElementById('tmt_channels').value = channels || '';
+  document.getElementById('tmt_currencies').value = currencies || '';
+  document.getElementById('tmt_total').value = total || '';
 
-    document.addEventListener('DOMContentLoaded', function() {
+  // confirm values
+  console.log('Auth:', auth, 'Channels:', channels, 'Currencies:', currencies, 'Total:', total);
+
   window.tmtPaymentModalReady = function() {
-    console.log('TMT SDK loaded and binding to form…');
+    console.log('TMT SDK loaded and binding to form...');
     new window.tmtPaymentModalSdk({
-      path: "tamilsontour", // your exact path from TMT
+      path: "tamilsontour", // use your exact Site Path
       formId: "tmt-payment-form",
       environment: "live",
       origin: "https://tamilsontour.github.io,https://tamilsontour.com"
-      document.getElementById('status').textContent = "Ready to pay.";
-    };
+    });
+    document.getElementById('status').textContent = "Ready to pay.";
+  };
+
+  // Add a listener to confirm Pay Now click triggers form submission
+  document.getElementById('tmt-payment-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    console.log('Form submitted – SDK should open modal now');
+  });
+});
   </script>
 </body>
 </html>
+
 
 
 
