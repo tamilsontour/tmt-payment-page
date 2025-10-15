@@ -20,39 +20,38 @@
     <input type="hidden" class="tmt_channels" id="tmt_channels">
     <input type="hidden" class="tmt_currencies" id="tmt_currencies">
     <input type="hidden" class="tmt_total" id="tmt_total">
-    <input type="hidden" class="tmt_reference" value="FOO123">
-    <input type="hidden" class="tmt_description" value="Holiday for two in Paris">
-    <input type="hidden" class="tmt_pax" value="2">
+    <input type="hidden" class="tmt_reference" value="">
+    <input type="hidden" class="tmt_description" value="Tamils on Tour Ski Trip 2026">
+    <input type="hidden" class="tmt_pax" value="1">
 
-    <label for="tmt_country">Country Travelling To</label>
-    <input id="tmt_country" type="text" class="tmt_country" value="FR">
-
-    <label for="tmt_date">Date of Completion</label>
-    <input id="tmt_date" type="text" class="tmt_date" value="2030-05-12">
+    <!-- hidden fixed travel details -->
+    <input type="hidden" id="tmt_country" class="tmt_country" value="FR">
+    <input type="hidden" id="tmt_date" class="tmt_date" value="2026-03-10">
+    
 
     <label for="tmt_firstname">Lead Traveller First Name</label>
-    <input id="tmt_firstname" type="text" class="tmt_firstname" value="John">
+    <input id="tmt_firstname" type="text" class="tmt_firstname" value="">
 
     <label for="tmt_surname">Lead Traveller Surname</label>
-    <input id="tmt_surname" type="text" class="tmt_surname" value="Smith">
+    <input id="tmt_surname" type="text" class="tmt_surname" value="">
 
     <label for="tmt_email">Lead Traveller Email</label>
-    <input id="tmt_email" type="email" class="tmt_email" value="john.smith@example.org">
+    <input id="tmt_email" type="email" class="tmt_email" value="">
 
     <label for="tmt_payee_name">Cardholder Name</label>
-    <input id="tmt_payee_name" type="text" class="tmt_payee_name" value="Jane Smith">
+    <input id="tmt_payee_name" type="text" class="tmt_payee_name" value="">
 
     <label for="tmt_payee_email">Cardholder Email</label>
-    <input id="tmt_payee_email" type="email" class="tmt_payee_email" value="jane.smith@example.org">
+    <input id="tmt_payee_email" type="email" class="tmt_payee_email" value="">
 
     <label for="tmt_payee_address">Cardholder Address</label>
-    <input id="tmt_payee_address" type="text" class="tmt_payee_address" value="123 Test Address">
+    <input id="tmt_payee_address" type="text" class="tmt_payee_address" value="">
 
     <label for="tmt_payee_city">Cardholder City</label>
-    <input id="tmt_payee_city" type="text" class="tmt_payee_city" value="Test City">
+    <input id="tmt_payee_city" type="text" class="tmt_payee_city" value="">
 
     <label for="tmt_payee_postcode">Cardholder Postcode</label>
-    <input id="tmt_payee_postcode" type="text" class="tmt_payee_postcode" value="0000">
+    <input id="tmt_payee_postcode" type="text" class="tmt_payee_postcode" value="">
 
     <label for="tmt_payee_country">Cardholder Country</label>
     <select id="tmt_payee_country" class="tmt_payee_country">
@@ -74,11 +73,13 @@
     const channels = params.get('channels');
     const currencies = params.get('currencies');
     const total = params.get('total');
+    const reference = params.get('reference');
 
     document.getElementById('tmt_booking_auth').value = auth || '';
     document.getElementById('tmt_channels').value = channels || 21509;
     document.getElementById('tmt_currencies').value = currencies || 'GBP';
     document.getElementById('tmt_total').value = total || 500;
+    document.getElementById('tmt_reference').value = reference || 'DEFAULT-REFERENCE';
 
   // confirm values
     console.log('Auth:', auth, 'Channels:', channels, 'Currencies:', currencies, 'Total:', total);
@@ -103,6 +104,7 @@
   </script>
 </body>
 </html>
+
 
 
 
