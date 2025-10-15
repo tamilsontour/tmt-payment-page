@@ -79,18 +79,20 @@
     document.getElementById('tmt_currencies').value = currencies || '';
     document.getElementById('tmt_total').value = total || '';
 
-    window.tmtPaymentModalReady = function () {
-      new window.tmtPaymentModalSdk({
-        path: "tamils-on-tour",   // replace with your live path
-        formId: "tmt-payment-form",
-        environment: "live",        // or test
-        origin: "https://tamilsontour.github.io,https://tamilsontour.com"
-      });
+    document.addEventListener('DOMContentLoaded', function() {
+  window.tmtPaymentModalReady = function() {
+    console.log('TMT SDK loaded and binding to form…');
+    new window.tmtPaymentModalSdk({
+      path: "tamilsontour", // your exact path from TMT
+      formId: "tmt-payment-form",
+      environment: "live",
+      origin: "https://tamilsontour.github.io,https://tamilsontour.com"
       document.getElementById('status').textContent = "Ready to pay.";
     };
   </script>
 </body>
 </html>
+
 
 
 
