@@ -1,120 +1,249 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Secure Payment</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Secure Payment | Tamils on Tour</title>
+
   <style>
-    body { font-family: system-ui, sans-serif; margin: 2rem; }
-    label { display:block; margin:0.5rem 0 0.25rem; }
-    input, select { width:100%; max-width:420px; padding:0.5rem; margin-bottom:0.5rem; }
-    #status { font-size:0.9rem; color:#666; }
+    :root {
+      --brand: #2b6cb0;
+      --brand-dark: #1e4f8a;
+      --bg: #f9fafb;
+      --card-bg: #ffffff;
+      --radius: 1rem;
+    }
+
+    body {
+      font-family: "Segoe UI", system-ui, sans-serif;
+      background: var(--bg);
+      margin: 0;
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .card, .summary {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      padding: 2rem;
+      width: 100%;
+      max-width: 420px;
+    }
+
+    h1, h2 {
+      color: var(--brand);
+      margin-bottom: 1rem;
+    }
+
+    h1 { text-align: center; }
+
+    label {
+      display: block;
+      margin-top: 0.75rem;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 0.6rem;
+      margin-top: 0.25rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    input[type="submit"] {
+      margin-top: 1.5rem;
+      background: var(--brand);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.2s ease;
+    }
+
+    input[type="submit"]:hover {
+      background: var(--brand-dark);
+    }
+
+    #status {
+      text-align: center;
+      margin-top: 1rem;
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    .summary h2 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .summary p {
+      margin: 0.25rem 0;
+      line-height: 1.5;
+    }
+
+    .price {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-top: 1rem;
+      color: #1a202c;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 1.5rem;
+      text-decoration: none;
+      color: var(--brand);
+      font-weight: 600;
+    }
+
+    .back-link:hover {
+      color: var(--brand-dark);
+      text-decoration: underline;
+    }
   </style>
 </head>
+
 <body>
-  <h1>Complete Your Payment</h1>
+  <!-- 💳 Payment Form -->
+  <div class="card">
+    <h1>Complete Your Payment</h1>
 
-  <form id="tmt-payment-form">
-    <input type="hidden" class="tmt_booking_auth" id="tmt_booking_auth">
-    <input type="hidden" class="tmt_booking_id" id="tmt_booking_id" value="0">
-    <input type="hidden" class="tmt_channels" id="tmt_channels">
-    <input type="hidden" class="tmt_currencies" id="tmt_currencies">
-    <input type="hidden" class="tmt_total" id="tmt_total">
-    <input type="hidden" class="tmt_reference" id="tmt_reference" value="">
-    <input type="hidden" class="tmt_description" value="Tamils on Tour Ski Trip 2026">
-    <input type="hidden" class="tmt_pax" value="1">
+    <form id="tmt-payment-form">
+      <input type="hidden" id="tmt_booking_auth" class="tmt_booking_auth" />
+      <input type="hidden" id="tmt_booking_id" class="tmt_booking_id" value="0" />
+      <input type="hidden" id="tmt_channels" class="tmt_channels" />
+      <input type="hidden" id="tmt_currencies" class="tmt_currencies" />
+      <input type="hidden" id="tmt_total" class="tmt_total" />
+      <input type="hidden" id="tmt_reference" class="tmt_reference" value="" />
+      <input type="hidden" id="tmt_description" class="tmt_description" value="Tamils on Tour Ski Trip 2026" />
+      <input type="hidden" id="tmt_pax" class="tmt_pax" value="1" />
 
-    <!-- hidden fixed travel details -->
-    <input type="hidden" id="tmt_country" class="tmt_country" value="FR">
-    <input type="hidden" id="tmt_date" class="tmt_date" value="2026-03-10">
-    
+      <!-- hidden fixed travel details -->
+      <input type="hidden" id="tmt_country" class="tmt_country" value="FR" />
+      <input type="hidden" id="tmt_date" class="tmt_date" value="2026-03-10" />
 
-    <label for="tmt_firstname">Lead Traveller First Name</label>
-    <input id="tmt_firstname" type="text" class="tmt_firstname" value="">
+      <label for="tmt_firstname">Lead Traveller First Name</label>
+      <input id="tmt_firstname" type="text" class="tmt_firstname" required />
 
-    <label for="tmt_surname">Lead Traveller Surname</label>
-    <input id="tmt_surname" type="text" class="tmt_surname" value="">
+      <label for="tmt_surname">Lead Traveller Surname</label>
+      <input id="tmt_surname" type="text" class="tmt_surname" required />
 
-    <label for="tmt_email">Lead Traveller Email</label>
-    <input id="tmt_email" type="email" class="tmt_email" value="">
+      <label for="tmt_email">Lead Traveller Email</label>
+      <input id="tmt_email" type="email" class="tmt_email" required />
 
-    <label for="tmt_payee_name">Cardholder Name</label>
-    <input id="tmt_payee_name" type="text" class="tmt_payee_name" value="">
+      <label for="tmt_payee_name">Cardholder Name</label>
+      <input id="tmt_payee_name" type="text" class="tmt_payee_name" required />
 
-    <label for="tmt_payee_email">Cardholder Email</label>
-    <input id="tmt_payee_email" type="email" class="tmt_payee_email" value="">
+      <label for="tmt_payee_email">Cardholder Email</label>
+      <input id="tmt_payee_email" type="email" class="tmt_payee_email" required />
 
-    <label for="tmt_payee_address">Cardholder Address</label>
-    <input id="tmt_payee_address" type="text" class="tmt_payee_address" value="">
+      <label for="tmt_payee_address">Cardholder Address</label>
+      <input id="tmt_payee_address" type="text" class="tmt_payee_address" required />
 
-    <label for="tmt_payee_city">Cardholder City</label>
-    <input id="tmt_payee_city" type="text" class="tmt_payee_city" value="">
+      <label for="tmt_payee_city">Cardholder City</label>
+      <input id="tmt_payee_city" type="text" class="tmt_payee_city" required />
 
-    <label for="tmt_payee_postcode">Cardholder Postcode</label>
-    <input id="tmt_payee_postcode" type="text" class="tmt_payee_postcode" value="">
+      <label for="tmt_payee_postcode">Cardholder Postcode</label>
+      <input id="tmt_payee_postcode" type="text" class="tmt_payee_postcode" required />
 
-    <label for="tmt_payee_country">Cardholder Country</label>
-    <select id="tmt_payee_country" class="tmt_payee_country">
-      <option value="GB" selected>United Kingdom</option>
-      <option value="US">United States</option>
-      <option value="AU">Australia</option>
-    </select>
+      <label for="tmt_payee_country">Cardholder Country</label>
+      <select id="tmt_payee_country" class="tmt_payee_country">
+        <option value="GB" selected>United Kingdom</option>
+        <option value="US">United States</option>
+        <option value="AU">Australia</option>
+      </select>
 
-    <input type="submit" value="Pay Now">
-  </form>
+      <input type="submit" value="Pay Now" />
+    </form>
 
-  <p id="status">Preparing secure payment session…</p>
+    <p id="status">Preparing secure payment session…</p>
+  </div>
+
+  <!-- 📦 Package Summary -->
+  <div class="summary" id="packageSummary">
+    <h2>Package Summary</h2>
+    <p id="packageName">Loading package...</p>
+    <p id="packageDesc">Please wait...</p>
+    <p class="price" id="packagePrice"></p>
+    <a href="https://tamilsontour.com" class="back-link">← Back to Tamils on Tour</a>
+  </div>
 
   <script src="https://payment.tmtprotects.com/tmt-payment-modal.3.6.1.js"></script>
   <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const params = new URLSearchParams(window.location.search);
-    const auth = params.get('auth');
-    const channels = params.get('channels');
-    const currencies = params.get('currencies');
-    const total = params.get('total');
-    const reference = params.get('reference');
+    document.addEventListener("DOMContentLoaded", function () {
+      const params = new URLSearchParams(window.location.search);
+      const auth = params.get("auth");
+      const channels = params.get("channels");
+      const currencies = params.get("currencies");
+      const total = parseInt(params.get("total"));
+      const reference = params.get("reference");
 
-    document.getElementById('tmt_booking_auth').value = auth || '';
-    document.getElementById('tmt_channels').value = channels || 21509;
-    document.getElementById('tmt_currencies').value = currencies || 'GBP';
-    document.getElementById('tmt_total').value = total || 500;
-    document.getElementById('tmt_reference').value = reference || 'DEFAULT-REFERENCE';
+      // Bind values safely
+      const safeSet = (id, val) => {
+        const el = document.getElementById(id);
+        if (el) el.value = val || "";
+      };
 
-  // confirm values
-    console.log('Auth:', auth, 'Channels:', channels, 'Currencies:', currencies, 'Total:', total);
+      safeSet("tmt_booking_auth", auth);
+      safeSet("tmt_channels", channels || 21509);
+      safeSet("tmt_currencies", currencies || "GBP");
+      safeSet("tmt_total", total || 5000);
+      safeSet("tmt_reference", reference || "DEFAULT-REFERENCE");
 
-    window.tmtPaymentModalReady = function() {
-      console.log('TMT SDK loaded and binding to form...');
-      new window.tmtPaymentModalSdk({
-        path: "tamils-on-tour", // use your exact Site Path
-        formId: "tmt-payment-form",
-        environment: "live",
-        origin: "https://tamilsontour.github.io,https://tamilsontour.com"
-      });
-    document.getElementById('status').textContent = "Ready to pay.";
-  };
+      console.log("Auth:", auth, "Ref:", reference, "Total:", total);
 
-  // Add a listener to confirm Pay Now click triggers form submission
-  document.getElementById('tmt-payment-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    console.log('Form submitted – SDK should open modal now');
-  });
-});
+      // 📦 Define package summaries
+      const packages = {
+        SnowseekerSki26: {
+          name: "❄️ Snowseeker Ski Trip 2026",
+          desc: "Experience the French Alps with 7 nights at a 4-star resort, daily breakfast, ski passes, and airport transfers.",
+          price: "£2,350",
+        },
+        SnowBlissBudget: {
+          name: "🎿 SnowBliss Budget Ski Package",
+          desc: "3-night getaway with equipment rental, breakfast, and lift access — perfect for a quick ski break.",
+          price: "£850",
+        },
+      };
+
+      const pkg = packages[reference] || {
+        name: "Custom Ski Package",
+        desc: "Your selected trip details will be confirmed shortly by our team.",
+        price: "—",
+      };
+
+      // Populate summary panel
+      document.getElementById("packageName").textContent = pkg.name;
+      document.getElementById("packageDesc").textContent = pkg.desc;
+      document.getElementById("packagePrice").textContent = pkg.price;
+
+      // Initialise TMT modal
+      window.tmtPaymentModalReady = function () {
+        new window.tmtPaymentModalSdk({
+          path: "tamils-on-tour",
+          formId: "tmt-payment-form",
+          environment: "live",
+          origin: "https://tamilsontour.github.io,https://tamilsontour.com",
+        });
+        document.getElementById("status").textContent = "Ready to pay.";
+      };
+
+      // Confirm form submission is intercepted
+      document
+        .getElementById("tmt-payment-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          console.log("Form submitted – SDK should open modal now");
+        });
+    });
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
