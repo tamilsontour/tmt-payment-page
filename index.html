@@ -75,22 +75,22 @@
     const currencies = params.get('currencies');
     const total = params.get('total');
 
-  document.getElementById('tmt_booking_auth').value = auth || '';
-  document.getElementById('tmt_channels').value = channels || '';
-  document.getElementById('tmt_currencies').value = currencies || '';
-  document.getElementById('tmt_total').value = total || '';
+    document.getElementById('tmt_booking_auth').value = auth || '';
+    document.getElementById('tmt_channels').value = channels || '';
+    document.getElementById('tmt_currencies').value = currencies || '';
+    document.getElementById('tmt_total').value = total || '';
 
   // confirm values
-  console.log('Auth:', auth, 'Channels:', channels, 'Currencies:', currencies, 'Total:', total);
+    console.log('Auth:', auth, 'Channels:', channels, 'Currencies:', currencies, 'Total:', total);
 
-  window.tmtPaymentModalReady = function() {
-    console.log('TMT SDK loaded and binding to form...');
-    new window.tmtPaymentModalSdk({
-      path: "tamilsontour", // use your exact Site Path
-      formId: "tmt-payment-form",
-      environment: "live",
-      origin: "https://tamilsontour.github.io,https://tamilsontour.com"
-    });
+    window.tmtPaymentModalReady = function() {
+      console.log('TMT SDK loaded and binding to form...');
+      new window.tmtPaymentModalSdk({
+        path: "tamils-on-tour", // use your exact Site Path
+        formId: "tmt-payment-form",
+        environment: "live",
+        origin: "https://tamilsontour.github.io,https://tamilsontour.com"
+      });
     document.getElementById('status').textContent = "Ready to pay.";
   };
 
@@ -103,6 +103,7 @@
   </script>
 </body>
 </html>
+
 
 
 
