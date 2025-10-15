@@ -246,17 +246,35 @@
         document.getElementById("status").textContent = "Ready to pay.";
       };
 
-      // Confirm form submission is intercepted
-      document
-        .getElementById("tmt-payment-form")
-        .addEventListener("submit", function (e) {
+       // Checkbox + submit logic (single handler)
+    const form = document.getElementById("tmt-payment-form");
+    const checkbox = document.getElementById("termsCheckbox");
+    const payButton = form.querySelector('input[type="submit"]');
+
+    if (checkbox && payButton) {
+      // Start disabled until checked
+      payButton.disabled = true;
+
+      checkbox.addEventListener("change", function () {
+        payButton.disabled = !this.checked;
+      });
+
+      form.addEventListener("submit", function (e) {
+        if (!checkbox.checked) {
           e.preventDefault();
-          console.log("Form submitted – SDK should open modal now");
-        });
-    });
+          alert("⚠️ Please agree to the Terms & Conditions and Privacy Policy before proceeding.");
+          return false;
+        }
+        // Only log; do NOT prevent default so the SDK can handle the submit
+        console.log("Form submitted – SDK should open modal now");
+      });
+    }
+  });
+
   </script>
 </body>
 </html>
+
 
 
 
