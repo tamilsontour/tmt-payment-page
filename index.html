@@ -196,6 +196,11 @@
       const total = parseInt(params.get("total"));
       const reference = params.get("reference");
 
+      // User info from Wix
+      const firstname = params.get("firstname");
+      const surname = params.get("surname");
+      const email = params.get("email");
+
       // Bind values safely
       const safeSet = (id, val) => {
         const el = document.getElementById(id);
@@ -207,8 +212,19 @@
       safeSet("tmt_currencies", currencies || "GBP");
       safeSet("tmt_total", total || 5000);
       safeSet("tmt_reference", reference || "DEFAULT-REFERENCE");
+      safeSet("tmt_firstname", firstname);
+      safeSet("tmt_surname", surname);
+      safeSet("tmt_email", email);
+
+      if (firstname && surname && email) {
+        document.getElementById("tmt_firstname").type = "hidden";
+        document.getElementById("tmt_surname").type = "hidden";
+        document.getElementById("tmt_email").type = "hidden";
+      }
 
       console.log("Auth:", auth, "Ref:", reference, "Total:", total);
+
+      
 
       // 📦 Define package summaries
       const packages = {
@@ -274,6 +290,7 @@
   </script>
 </body>
 </html>
+
 
 
 
